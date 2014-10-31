@@ -1,4 +1,4 @@
-package Web;
+package Web.Parser;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
