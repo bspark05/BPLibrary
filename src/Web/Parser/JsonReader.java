@@ -6,9 +6,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,10 +32,4 @@ public class JsonReader {
 	    }
 	  }
 	  
-	
-	public ArrayList<String[]> removeDuplicates(ArrayList<String[]> arrList){
-		  LinkedHashSet<String[]> hashSet = new LinkedHashSet<String[]>(arrList);
-		  ArrayList<String[]> RArrList = new ArrayList<String[]>(hashSet);
-		  return RArrList;
-	  }
 }
