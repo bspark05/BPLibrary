@@ -13,11 +13,14 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 public class ExcelConvert {
+	private Workbook wb = new XSSFWorkbook();
+	private Sheet sheet = wb.createSheet("sheet 1");
 	
-	public void writingExcelFile(ArrayList<String[]> arrList, Sheet sheet, int rownum) throws Exception{
+	public void writingExcelFile(ArrayList<String[]> arrList, int rownum) throws Exception{
 		try {
 	        for (int j = 0; j < arrList.size(); j++) {
 	            Row row = sheet.createRow(rownum);
@@ -34,7 +37,7 @@ public class ExcelConvert {
 	    }
 	}
 	
-	public void createExcelFile(Workbook wb, String filename){
+	public void createExcelFile(String filename){
 		FileOutputStream fileOut;
         try {
              
@@ -52,8 +55,9 @@ public class ExcelConvert {
 	}
 	
 	
-	public ArrayList<double[]> readExcelFileNum(String filepath, String sheetname){
+	public ArrayList<double[]> readExcelFileNum(String filepath, String sheetname, int colNum){
 		ArrayList<double[]> arrList = new ArrayList<double[]>();
+		
 		try {
 			FileInputStream fileInputStream = new FileInputStream(filepath);
 			@SuppressWarnings("resource")
@@ -61,19 +65,10 @@ public class ExcelConvert {
 			HSSFSheet worksheet = workbook.getSheet(sheetname);
 			for(int i=0;i<=worksheet.getLastRowNum();i++){
 				HSSFRow row = worksheet.getRow(i);
-				HSSFCell cell0=row.getCell(0);
-				double objectID = cell0.getNumericCellValue();
-				HSSFCell cell1=row.getCell(1);
-				double right = cell1.getNumericCellValue();
-				HSSFCell cell2=row.getCell(2);
-				double top = cell2.getNumericCellValue();
-				HSSFCell cell3=row.getCell(3);
-				double left = cell3.getNumericCellValue();
-				HSSFCell cell4=row.getCell(4);
-				double bottom = cell4.getNumericCellValue();
-				
-				double[] arr = {objectID, top, bottom, left, right};
-				arrList.add(arr);
+				HSSFCell cellColNum=row.getCell(colNum);
+				double output = cellColNum.getNumericCellValue();
+				double[] list = {output};
+				arrList.add(list);
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -86,7 +81,7 @@ public class ExcelConvert {
 		
 	}
 	
-	public ArrayList<String[]> readExcelFileStr(String filepath, String sheetname){
+	public ArrayList<String[]> readExcelFileStr(String filepath, String sheetname, int colNum){
 		ArrayList<String[]> arrList = new ArrayList<String[]>();
 		try {
 			FileInputStream fileInputStream = new FileInputStream(filepath);
@@ -95,15 +90,11 @@ public class ExcelConvert {
 			HSSFSheet worksheet = workbook.getSheet(sheetname);
 			for(int i=0;i<=worksheet.getLastRowNum();i++){
 				HSSFRow row = worksheet.getRow(i);
-				HSSFCell cell0=row.getCell(0);
-				String client_id = cell0.getStringCellValue();
-				HSSFCell cell1=row.getCell(1);
-				String client_secret = cell1.getStringCellValue();
-				HSSFCell cell2=row.getCell(2);
-				String tokenDate = cell2.getStringCellValue();
-				
-				String[] arr = {client_id, client_secret, tokenDate};
-				arrList.add(arr);
+				HSSFCell cellColNum=row.getCell(colNum);
+				String output = cellColNum.getStringCellValue();
+				String[] list = {output};
+		
+				arrList.add(list);
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
