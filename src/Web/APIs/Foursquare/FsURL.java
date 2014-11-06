@@ -32,9 +32,9 @@ public class FsURL {
 				double top = cell1.getNumericCellValue();
 				HSSFCell cell2=row.getCell(2);
 				double bottom = cell2.getNumericCellValue();
-				HSSFCell cell3=row.getCell(2);
+				HSSFCell cell3=row.getCell(3);
 				double left = cell3.getNumericCellValue();
-				HSSFCell cell4=row.getCell(2);
+				HSSFCell cell4=row.getCell(4);
 				double right = cell4.getNumericCellValue();
 				
 				double[] arr = {objectId, top, bottom, left, right};
