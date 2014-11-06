@@ -10,12 +10,11 @@ import org.json.JSONTokener;
 import Web.Parser.JsonReader;
 
 public class FoursquareAPI {
-	FsURL fsurl = new FsURL();
-
-	public ArrayList<String[]> venues_search(double radius, double latsql, double lngsql) throws IOException, JSONException{
+	public ArrayList<String[]> venues_search(String url) throws IOException, JSONException{
+		
 		ArrayList<String[]> arrayList = new ArrayList<String[]>();
 		
-		JSONObject json = JsonReader.readJsonFromUrl(fsurl.getURL());
+		JSONObject json = JsonReader.readJsonFromUrl(url);
 		JSONObject json1 = (JSONObject) new JSONTokener(json.toString()).nextValue();
         JSONObject json2 = json1.getJSONObject("response");
         
