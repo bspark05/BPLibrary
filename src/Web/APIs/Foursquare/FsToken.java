@@ -10,7 +10,35 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-public class FsToken {	
+public class FsToken {
+	private String client_id;
+	private String client_secret;
+	private String tokenDate;
+	
+	private int index = 0;
+	
+	public String getClient_id() {
+		return client_id;
+	}
+	public String getClient_secret() {
+		return client_secret;
+	}
+	public String getTokenDate() {
+		return tokenDate;
+	}
+	
+	public void setToken(String filepath, String sheetname) {
+		ArrayList<String[]> tokenList = tokenReady(filepath, sheetname);
+		String[] tokenPair = tokenIterator(tokenList);
+		
+		this.client_id = tokenPair[0];
+		this.client_secret = tokenPair[1];
+		this.tokenDate = tokenPair[2];
+	}
+	public void getToken(){
+		
+	}
+	
 	public ArrayList<String[]> tokenReady(String filepath, String sheetname){
 		ArrayList<String[]> arrList = new ArrayList<String[]>();
 		try {
@@ -40,7 +68,7 @@ public class FsToken {
 		return arrList;		
 	}
 	
-	public String[] tokenIterator(ArrayList<String[]> tokenList, int index){
+	public String[] tokenIterator(ArrayList<String[]> tokenList){
 		String[] tokenPair = {"", "", ""};
 		int i = index%tokenList.size();
 		tokenPair = tokenList.get(i);
