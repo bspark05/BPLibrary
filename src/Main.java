@@ -50,8 +50,8 @@ public class Main {
 			lat = top;
 			lng = left;
 			
-			double interval_lat = (top-bottom)/40;
-			double intercal_lng = (right-left)/40;
+			double interval_lat = (top-bottom)/4;
+			double intercal_lng = (right-left)/4;
 			
 			while(lng<right){
 				while(lat>bottom){
