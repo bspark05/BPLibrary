@@ -43,4 +43,38 @@ public class FoursquareAPI {
         }
 		return arrayList;
 	}
+	
+	public ArrayList<String[]> venues_NextVenues(String url) throws IOException, JSONException{
+		ArrayList<String[]> arrayList = new ArrayList<String[]>();
+		JSONObject json = JsonReader.readJsonFromUrl(url);
+		JSONObject json1 = (JSONObject) new JSONTokener(json.toString()).nextValue();
+        JSONObject json2 = json1.getJSONObject("response");
+        JSONObject json3 = json2.getJSONObject("nextVenues");
+        
+        JSONArray arr1 = json3.getJSONArray("items");
+        for(int i=0;i<arr1.length();i++){
+        	String id = arr1.getJSONObject(i).getString("id");
+        	String name = arr1.getJSONObject(i).getString("name");
+        	//String phone = arr1.getJSONObject(i).getJSONObject("contact").getString("phone");
+        	double lat = arr1.getJSONObject(i).getJSONObject("location").getDouble("lat");
+        	double lng = arr1.getJSONObject(i).getJSONObject("location").getDouble("lng");
+        	
+        	int checkinsCount = arr1.getJSONObject(i).getJSONObject("stats").getInt("checkinsCount");
+        	int usersCount = arr1.getJSONObject(i).getJSONObject("stats").getInt("usersCount");
+        	
+        	JSONArray arr2 = arr1.getJSONObject(i).getJSONArray("categories");
+        	String cateName = null;
+        	if(arr2.isNull(0)){
+        		cateName = "null";
+        	}else{
+        		cateName = arr2.getJSONObject(0).getString("name");
+        	}
+        		
+        	String[] array = {id, name, cateName, Double.toString(lat), Double.toString(lng), Integer.toString(checkinsCount), Integer.toString(usersCount)};
+        	//String[] array = {name, Double.toString(lat), Double.toString(lng), Integer.toString(checkinsCount), Integer.toString(usersCount)};
+        	arrayList.add(array);
+        }
+		return arrayList;
+		
+	}
 }

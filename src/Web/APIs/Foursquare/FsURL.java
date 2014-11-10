@@ -58,4 +58,13 @@ public class FsURL {
 		return url;
 	}
 	
+	public String makeURL_venues_nextVenues(String placeID, String[] tokenSet){
+		String clientId = tokenSet[0];
+		String clientSc = tokenSet[1];
+		String tokenDate = tokenSet[2];
+		
+		String url = "https://api.foursquare.com/v2/venues/"+placeID+"/nextvenues?client_id="+clientId+"&client_secret="+clientSc+"&v="+tokenDate;
+		return url;
+	}
+	
 }

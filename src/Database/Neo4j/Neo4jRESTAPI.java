@@ -10,7 +10,7 @@ import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.neo4j.graphdb.RelationshipType;
 
 
-public class Neo4jQuery {
+public class Neo4jRESTAPI {
 
     Relationship relationship;
     final String SERVER_ROOT_URI = "http://localhost:7474";
@@ -18,7 +18,7 @@ public class Neo4jQuery {
     @SuppressWarnings("unused")
 	private static enum RelTypes implements RelationshipType
     {
-        KNOWS,friend;
+        Next;
     }
 
     /*public static void main(String[] args){
@@ -123,12 +123,12 @@ public class Neo4jQuery {
                                                                         "application/json",
                                                                         "UTF-8");
             mPost.setRequestEntity(requestEntity);
-            int satus = client.executeMethod(mPost);
+            int status = client.executeMethod(mPost);
             output = mPost.getResponseBodyAsString( );
             Header locationHeader =  mPost.getResponseHeader("location");
             location = locationHeader.getValue();
             mPost.releaseConnection( );
-            System.out.println("satus : " + satus);
+            System.out.println("status : " + status);
             System.out.println("location : " + location);
             System.out.println("output : " + output);
         }catch(Exception e){
@@ -172,11 +172,11 @@ public class Neo4jQuery {
                                                                         "application/json",
                                                                         "UTF-8");
             mPut.setRequestEntity(requestEntity);
-            int satus = client.executeMethod(mPut);
-            output = mPut.getResponseBodyAsString( );
+            int status = client.executeMethod(mPut);
+            output = mPut.getResponseBodyAsString();
 
             mPut.releaseConnection( );
-            System.out.println("satus : " + satus);
+            System.out.println("status : " + status);
             System.out.println("output : " + output);
         }catch(Exception e){
              System.out.println("Exception in creating node in neo4j : " + e);
@@ -229,12 +229,12 @@ public class Neo4jQuery {
                                                                         "application/json",
                                                                         "UTF-8");
             mPost.setRequestEntity(requestEntity);
-            int satus = client.executeMethod(mPost);
+            int status = client.executeMethod(mPost);
             output = mPost.getResponseBodyAsString( );
             Header locationHeader =  mPost.getResponseHeader("location");
             location = locationHeader.getValue();
             mPost.releaseConnection( );
-            System.out.println("satus : " + satus);
+            System.out.println("status : " + status);
             System.out.println("location : " + location);
             System.out.println("output : " + output);
         }catch(Exception e){
