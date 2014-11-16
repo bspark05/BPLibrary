@@ -78,7 +78,7 @@ public class Neo4jRESTAPI {
 			mPost.releaseConnection();
 			System.out.println("status : " + status);
 			System.out.println("location : " + location);
-			System.out.println("output : " + output);
+			//System.out.println("output : " + output);
 		} catch (Exception e) {
 			System.out.println("Exception in creating node in neo4j : " + e);
 		}
@@ -127,7 +127,7 @@ public class Neo4jRESTAPI {
 
 			mPut.releaseConnection();
 			System.out.println("status : " + status);
-			System.out.println("output : " + output);
+			//System.out.println("output : " + output);
 		} catch (Exception e) {
 			System.out.println("Exception in creating node in neo4j : " + e);
 		}
@@ -182,7 +182,7 @@ public class Neo4jRESTAPI {
 			mPost.releaseConnection();
 			System.out.println("status : " + status);
 			System.out.println("location : " + location);
-			System.out.println("output : " + output);
+			//System.out.println("output : " + output);
 		} catch (Exception e) {
 			System.out.println("Exception in creating node in neo4j : " + e);
 		}
@@ -232,6 +232,7 @@ public class Neo4jRESTAPI {
 	 * @param propertyName
 	 * @param propertyValue
 	 */
+	@SuppressWarnings("unused")
 	private void addPropertyToRelation(String relationshipUri,
 			String propertyName, String propertyValue) {
 
@@ -265,7 +266,7 @@ public class Neo4jRESTAPI {
 
 			mPut.releaseConnection();
 			System.out.println("satus : " + satus);
-			System.out.println("output : " + output);
+			//System.out.println("output : " + output);
 		} catch (Exception e) {
 			System.out.println("Exception in creating node in neo4j : " + e);
 		}
@@ -327,7 +328,7 @@ public class Neo4jRESTAPI {
 			output = mPost.getResponseBodyAsString();
 			mPost.releaseConnection();
 			System.out.println("satus : " + satus);
-			System.out.println("output : " + output);
+			//System.out.println("output : " + output);
 		} catch (Exception e) {
 			System.out.println("Exception in creating node in neo4j : " + e);
 		}
@@ -382,7 +383,7 @@ public class Neo4jRESTAPI {
 			mPost.releaseConnection();
 			System.out.println("status : " + status);
 			System.out.println("location : " + location);
-			System.out.println("output : " + output);
+			//System.out.println("output : " + output);
 		} catch (Exception e) {
 			System.out.println("Exception in creating node in neo4j : " + e);
 		}
@@ -417,7 +418,7 @@ public class Neo4jRESTAPI {
 	}
 
 	public String addUniqueRelationship(String key, String value, String startNodeURI, String endNodeURI,
-			RelTypes relationshipType, String... jsonAttributes) {
+			String... jsonAttributes) {
 		String output = null;
 		String location = null;
 		String self = null;
@@ -426,7 +427,7 @@ public class Neo4jRESTAPI {
 			String fromUrl = "http://localhost:7474/db/data/index/relationship/rels?uniqueness=get_or_create";
 			System.out.println("from url : " + fromUrl);
 
-			String relationshipJson = generateJsonUniqueRelationship(key, value, startNodeURI, endNodeURI, relationshipType, jsonAttributes);
+			String relationshipJson = generateJsonUniqueRelationship(key, value, startNodeURI, endNodeURI, jsonAttributes);
 
 			System.out.println("relationshipJson : " + relationshipJson);
 
@@ -462,7 +463,7 @@ public class Neo4jRESTAPI {
 			mPost.releaseConnection();
 			System.out.println("status : " + status);
 			System.out.println("location : " + location);
-			System.out.println("output : " + output);
+			//System.out.println("output : " + output);
 		} catch (Exception e) {
 			System.out.println("Exception in creating node in neo4j : " + e);
 		}
@@ -472,7 +473,7 @@ public class Neo4jRESTAPI {
 	}
 	
 	private String generateJsonUniqueRelationship(String key, String value, String startNodeURL, String endNodeURL,
-			RelTypes relationshipType, String... jsonAttributes) {
+			String... jsonAttributes) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{ \"key\" : \"");
 		sb.append(key);
@@ -491,7 +492,7 @@ public class Neo4jRESTAPI {
 		sb.append("\", ");
 		
 		sb.append("\"type\" : \"");
-		sb.append(relationshipType);
+		sb.append(RelTypes.nextVenue);
 
 		if (jsonAttributes == null || jsonAttributes.length < 1) {
 			sb.append("\"");
