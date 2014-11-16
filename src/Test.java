@@ -9,40 +9,60 @@ import Web.APIs.Foursquare.FsURL;
 
 
 public class Test {
-	public ArrayList<String[]> iteration(int depth, ArrayList<String[]> venues, ArrayList<String[]> fromList) throws IOException, JSONException {
+	public ArrayList<String[]> iteration(int depth, ArrayList<String[]> fromList) throws IOException, JSONException {
 		FsToken fstoken = new FsToken();
 		FsURL fsURL = new FsURL();
 		FoursquareAPI fsAPI = new FoursquareAPI();
 		ArrayList<String[]> token = fstoken.tokenReady("tokenList.xls", "sheet1");
 		
-		if(depth==0){
-			return fromList;
-		}else{
-			for(int i=0; i<venues.size();i++){
-				String[] tokenSet = token.get(i%token.size());
-				String url = fsURL.makeURL_venues_nextVenues(venues.get(i)[0], tokenSet);
-				ArrayList<String[]> venues1 = fsAPI.venues_NextVenues(url);
-				ArrayList<String[]> fromList1 = checkList(venues.get(i),fromList);
-				
-				iteration(depth-1, venues1, fromList1);
+		int indexFromList = fromList.size();
+		System.out.println("initial no. of fromList = "+indexFromList);
+		
+		int startindex=0;
+		
+		while(depth>0){
+			ArrayList<String[]> tempFromList = new ArrayList<String[]>();
+			System.out.println("depth = "+ depth);
+			for(int k=0;k<fromList.size();k++){
+				tempFromList.add(fromList.get(k));
 			}
-			return fromList;
+			System.out.println("size of tempFromList = " +tempFromList.size());
+			
+			int index = 0;
+			
+			for(int i=startindex; i<tempFromList.size();i++){
+				String[] tokenSet = token.get(i%token.size());
+				String url = fsURL.makeURL_venues_nextVenues(tempFromList.get(i)[0], tokenSet);
+				ArrayList<String[]> venues1 = fsAPI.venues_NextVenues(url);
+				
+				for(int j = 0;j<venues1.size();j++){
+					ArrayList<String[]> resultfromList = checkList(venues1.get(j), fromList);
+					fromList = resultfromList;
+				}
+				index++;
+				System.out.println("# in fromList = "+index);
+			}
+			startindex = startindex+index;
+			
+			depth--;
+			
+			System.out.println("size of fromList in the depth = "+fromList.size());
 		}
+		System.out.println("final fromList.size() = "+fromList.size());
+		return fromList;
 	}
 	
 	//output: renewed fromList, input: 
 	public ArrayList<String[]> checkList(String[] oneVenue, ArrayList<String[]> fromList){
-		for(int i = 0; i<fromList.size();i++){
-			if(!fromList.get(i)[0].equals(oneVenue[0])){
-				System.out.println("no");
-				fromList.add(oneVenue);
-			}else{
-				System.out.println("yes");
+		for(int i =0;i<fromList.size();i++){
+			if(fromList.get(i)[0].equals(oneVenue[0])){
+				System.out.println("in the list");
+				return fromList;
 			}
 		}
-		for(int j=0;j<fromList.size();j++){
-			System.out.println(fromList.get(j)[0]);
-			}
+		fromList.add(oneVenue);
+		System.out.println("added value = "+oneVenue[0]);
 		return fromList;
 	}
+	
 }
