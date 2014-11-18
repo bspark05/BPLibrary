@@ -40,9 +40,11 @@ public class Main {
 			String[] tokenSet = token.get(i%token.size());
 			String url1 = fsURL.makeURL_venues_nextVenues(fromList.get(i)[0], tokenSet);
 			ArrayList<String[]> venues1 = fsAPI.venues_NextVenues(url1);
-			String startNode = neo4j.createUniqueNode("Id", fromList.get(i)[0], null);
+			String nodeAttribute1 = test.setAttribute(fromList.get(i));
+			String startNode = neo4j.createUniqueNode("Id", fromList.get(i)[0], nodeAttribute1);
 			for(int j=0;j<venues1.size();j++){
-				String endNode = neo4j.createUniqueNode("Id", venues1.get(j)[0], null);
+				String nodeAttribute2 = test.setAttribute(venues1.get(j)); 
+				String endNode = neo4j.createUniqueNode("Id", venues1.get(j)[0], nodeAttribute2);
 				String relationId = fromList.get(i)[0]+"_to_"+venues1.get(j)[0];
 				String relation = neo4j.addUniqueRelationship("Id", relationId, startNode, endNode, null);
 			}

@@ -65,4 +65,14 @@ public class Test {
 		return fromList;
 	}
 	
+	public String setAttribute(String[] venue){
+		String attribute = "{ \"name\" : \"" + venue[1]+"\", "
+							+ " \"category\" : \"" + venue[2]+"\", "
+							+ " \"lat\" : \"" + venue[3]+"\", "
+							+ " \"lng\" : \"" + venue[4]+"\", "
+							+ " \"checkins\" : \"" + venue[5]+"\", "
+							+ " \"users\" : \"" + venue[6]+"\"}";
+		return attribute;
+		
+	}
 }
