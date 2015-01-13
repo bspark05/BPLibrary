@@ -16,7 +16,7 @@ public class Neo4jRESTAPI {
 	Relationship relationship;
 	final String SERVER_ROOT_URI = "http://localhost:7474";
 	
-	
+		
 	private static enum RelTypes implements RelationshipType {
 		nextVenue, Know
 	}

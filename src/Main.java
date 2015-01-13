@@ -33,7 +33,7 @@ public class Main {
 
 		fromList = test.iteration(4, venues);
 		
-		//Read Token table
+		//Read Token table5
 		ArrayList<String[]> token = fstoken.tokenReady("tokenList.xls", "sheet1");
 		
 		for(int i = 0;i<fromList.size();i++){
